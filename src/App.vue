@@ -1,11 +1,31 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="marcoBlanco">
+    <div class="cajaGris">
+      <h1>Open Music</h1>
+    </div>
+  </div>
+  <h4>Categorias</h4>
+  <h4>Número de Albums {{ countGeneral }}</h4>
+  <nav class="mt-5">
+    <router-link to="/pop" class="btn btn-success">POP ({{ countPop }})</router-link>
+    <router-link to="/rock" class="btn btn-success">ROCK ({{ countRock }})</router-link>
+    <router-link to="/rap" class="btn btn-success">RAP ({{ countRap }})</router-link>
   </nav>
-  <router-view/>
+  <NewAlbumComponent></NewAlbumComponent>
+  <router-view />
 </template>
-
+<script>
+import { mapGetters } from 'vuex';
+import NewAlbumComponent from './components/NewAlbumComponent.vue';
+export default {
+  name: 'NewAlbum',
+  components: {
+    NewAlbumComponent,
+  }, computed: {
+    ...mapGetters(['countPop', 'countRock','countRap', 'countGeneral']),
+  },
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -15,16 +35,29 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-}
-
 nav a {
-  font-weight: bold;
-  color: #2c3e50;
+  margin-left: 10px;
+  width: 200px;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.marcoBlanco {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+/* Estilos para el contenedor interno */
+.cajaGris {
+  background-color: #ccc;
+  padding: 10px;
+  width: 90%;
+
+}
+
+/* Estilos para el encabezado h1 */
+h1 {
+  margin: 0;
+  /* Eliminamos el margen predeterminado */
 }
 </style>
